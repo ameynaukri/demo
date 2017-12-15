@@ -1,0 +1,193 @@
+<div class="fixed-left">
+   <div id="wrapper">
+      <div class="topbar">
+         
+         <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+               <div class="">
+                  <ul class="nav navbar-nav navbar-right pull-right">
+                     <li class="dropdown">
+                        <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"> <img src="assets/images/avatar-1.jpg" alt="user-img" class="img-circle"> <span class="profile-username"> {{ username }} <br/></span> 
+                        </a>
+                        <!-- <ul class="dropdown-menu">
+                           <li><a href="javascript:void(0)"> Profile</a></li>
+                           <li><a href="javascript:void(0)">Settings </a></li>
+                           <li class="divider"></li>
+                           <li><a href="" ng-click="logout()"> Logout</a></li>
+                           </ul> -->
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+       <div ng-include="'templates/common/header.html'"></div>  
+      <div class="content-page">
+         <div class="content">
+            <div class="container heading_section">
+               <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                  <div class="col-sm-10" >
+                     <div class="panel panel-primary">
+                        <center>
+                           <h4 class="m-t-0 heading_top"> Add Registration</h4>
+                        </center>
+                        <div class="panel-body" style="padding:0 32px;">
+                           <form class="form-horizontal" role="form" enctype="multipart/form-data" name="regForm" novalidate>
+                              <div class="form-group">
+                                 <br/>  <br/>
+                                 <!-- car -->
+                                 <div ng-class="{ 'has-error' : (submitted && regForm.username.$error.required) || (regForm.username.$invalid && !regForm.username.$pristine) }" >
+                                    <label class="col-md-2 control-label">User name</label>
+                                    <div class="col-md-10">
+                                       <input type="text" 
+                                          class="form-control"
+                                          name="username"
+                                          
+                                          ng-model="formData.username"
+                                          ng-minlength="2"
+                                          placeholder="Enter User name" 
+                                          required="">
+                                       <span ng-show="(submitted && regForm.username.$error.required) || (regForm.username.$invalid && !regForm.username.$pristine)" class="help-block">
+                                       <span ng-show="regForm.username.$error.required"> User name is required.</span>
+                                       </span>  
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="form-group" ng-class="{ 'has-error' : (submitted && regForm.password.$error.required) || (regForm.password.$invalid && !regForm.password.$pristine) }" >
+                                 <div >
+                                    <label class="col-md-2 control-label">Password</label>
+                                    <div class="col-md-10">
+                                       <input type="password" 
+                                          class="form-control"
+                                          name="password"
+                                          
+                                          ng-model="formData.password"
+                                          ng-minlength="2"
+                                          placeholder="Enter Last Name" 
+                                          required="">
+                                       <span ng-show="(submitted && regForm.password.$error.required) || (regForm.password.$invalid && !regForm.password.$pristine)" class="help-block">
+                                          <span ng-show="regForm.password.$error.required"> Password is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="form-group" ng-class="{ 'has-error' : (submitted && regForm.user_type.$error.required) || (regForm.user_type.$invalid && !regForm.user_type.$pristine) }" >
+                                 <div >
+                                    <label class="col-md-2 control-label">user_type</label>
+                                    <div class="col-md-10">
+                                       <select name="user_type" ng-model="formData.user_type">
+                                          <option value="Admin">Admin</option>
+                                          <option value="SuperAdmin">SuperAdmin</option>
+                                       </select>
+                                       <span ng-show="(submitted && regForm.user_type.$error.required) || (regForm.user_type.$invalid && !regForm.user_type.$pristine)" class="help-block">
+                                          <span ng-show="regForm.user_type.$error.required"> User type is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="form-group" ng-class="{ 'has-error' : (submitted && regForm.status.$error.required) || (regForm.status.$invalid && !regForm.status.$pristine) }" >
+                                 <div >
+                                    <label class="col-md-2 control-label">status</label>
+
+                                    <div class="radio">
+                                      <label>
+                                          <input ng-model="formData.status" type="radio" name="rdostatus" ng-value="'1'">
+                                            True
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                          <input ng-model="formData.status" type="radio" name="rdostatus" ng-value="'0'">
+                                            False
+                                      </label>
+                                    </div>
+                                    <!-- <div class="col-md-10">
+                                       <input type="radio" 
+                                          name="status"
+                                          ng-model="formData.status"
+                                          ng-minlength="2"
+                                          placeholder="Enter Last Name" 
+                                          >True
+                                          <input type="radio" 
+                                          name="status"
+                                          ng-model="formData.status"
+                                          ng-minlength="2"
+                                          placeholder="Enter Last Name" 
+                                          >False
+                                       <span ng-show="(submitted && regForm.status.$error.required) || (regForm.status.$invalid && !regForm.status.$pristine)" class="help-block">
+                                          <span ng-show="regForm.status.$error.required"> status is required.</span>
+                                    </div> -->
+
+                                    
+                                 </div>
+                              </div>
+                        </div>
+                        <select ng-model="formData.Country"
+                                ng-change="selectedItemChanged(regForm)">
+                                <option value="1" >One</option>
+                                <option value="2" >Two</option>
+                                <option value="3" >Three</option>
+                        </select>
+                        <select ng-model="formData.number" class = "form-control">
+                              <option ng-repeat = "data in Country_name" value = {{data.username}}>{{data.username}}</option>
+                        </select>
+                        <input type="file" file-model="formData.file"/>
+                        <!-- <li ng-repeat="data in Country_name"> 
+                           <input type="checkbox" name="tags" ng-model="formData.selected" value={{data.username}} > {{data.username}} 
+                        </li> -->
+                        
+                        <!-- <div ng-repeat="formData in Country_name">
+                           <input id="chkCustomer_{{formData.full_name}}" type="checkbox" ng-model="formData.full_name[]" />{{formData.full_name}}
+                        </div> -->
+
+                        <div ng-repeat="fruit in Fruits">
+                           <label for="chkCustomer_{{fruit.FruitId}}">
+                              <input id="chkCustomer_{{fruit.FruitId}}" type="checkbox" ng-model="fruit.Selected" />{{fruit.Name}}
+                           </label>
+                        </div>
+                        <!-- <input  type="checkbox"  ng-model="formData.full_name" />Amey <br>
+                        <input  type="checkbox"  ng-model="formData.full_name" />Shubham <br>
+                        <input  type="checkbox"  ng-model="formData.full_name" />Anuj <br> -->
+
+                        <!-- <select ng-model="selectedName" ng-options="x for x in names">
+                        </select> -->
+                        <!-- <table border="1">
+                           <tr>
+                              <td><center>User name</center></td>
+                              <td><center>Full name</center></td>
+                              <td><center>Contact no</center></td>
+                              <td><center>Action</center></td>
+                           </tr>
+                           <tr ng-repeat="data in Country_name" ng-init="Data=data;Data.password=data.full_name">
+                              <td ng-hide="data.edit">{{data.username}}</td>
+                              <td ng-hide="data.edit">{{data.full_name}}</td>
+                              <td ng-hide="data.edit">{{data.contact_no}}</td>
+                              <td ng-show="data.edit"><input ng-model="data.username"</td>
+                              <td ng-show="data.edit"><input ng-model="data.full_name"</td>
+                              <td ng-show="data.edit"><input ng-model="data.contact_no"</td>
+                              <td ><button class="btn btn-success" ng-click="cont(Data)" ng-hide="data.edit">Edit</button><button class="btn btn-success" ng-show="data.edit" ng-click="cont(data)">Save</button>&nbsp;&nbsp;<button ng-click="delete(data)">Delete</button></td>
+                           </tr>
+                        </table> -->
+                        <!-- <select ng-options="option for option in listOfOptions" 
+                              ng-model="selectedItem"
+                              ng-change="selectedItemChanged()">
+                        </select> -->
+                        <!--  -->
+                        <div class="form-group text-center m-t-40">
+                        <div class="col-xs-12">
+                        <button class="btn btn-primary btn-block btn-lg waves-effect waves-light" ng-click="regUser(regForm.$valid)">Add User</button> 
+                       <!--  <button class="btn btn-primary btn-block btn-lg waves-effect waves-light" ng-click="regUser(regForm.$valid)" >Add User</button>  -->
+                        </div>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-1">
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>

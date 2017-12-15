@@ -1,0 +1,59 @@
+<div class="navbar navbar-default" role="navigation">
+            <div class="container">
+               <div class="">
+                  <ul class="nav navbar-nav navbar-right pull-right">
+                     <li class="dropdown">
+                        <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"> <img src="assets/images/avatar-1.jpg" alt="user-img" class="img-circle"> <span class="profile-username"> {{ username }} <br/></span> 
+                        </a>
+                        <!-- <ul class="dropdown-menu">
+                           <li><a href="javascript:void(0)"> Profile</a></li>
+                           <li><a href="javascript:void(0)">Settings </a></li>
+                           <li class="divider"></li>
+                           <li><a href="" ng-click="logout()"> Logout</a></li>
+                           </ul> -->
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+       <div ng-include="'templates/common/header.html'"></div>  
+		<h1>Angular Node File Upload</h1>
+        <form  ng-controller="MyCtrl as up" name="up.upload_form">
+                Single Image with validations
+                <input 
+                type="text" 
+                ng-model="up.name" 
+                name="name" 
+                />
+                <input type="checkbox"
+                ng-model="up.cricket"
+                />cricket
+                <input type="checkbox"
+                ng-model="up.football"
+                />football
+                <input type="checkbox"
+                ng-model="up.hockey"
+                />hockey
+
+
+            <input 
+                type="file" 
+                ngf-select 
+                ng-model="up.file" 
+                name="file" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="20MB" 
+                />
+            Image thumbnail: <img style="width:100px;" ng-show="up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>
+            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+            <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+            {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+           <!--  Multiple files
+            <div class="button" ngf-select ng-model="up.files" ngf-multiple="true">Select</div>
+            Drop files: <div ngf-drop ng-model="up.files" class="drop-box">Drop</div> -->
+            <button type="submit" ng-click="up.submit()">submit</button>
+            <p>{{up.progress}}</p>
+        </form>
+	
