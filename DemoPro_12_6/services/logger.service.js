@@ -1,10 +1,10 @@
 
-var config = require('../config.js');
-var _ = require('lodash');
-var graylog2 = require("graylog2");
+let config = require('../config.js');
+let _ = require('lodash');
+let graylog2 = require("graylog2");
 
 //Loggers always exist with a local logging mechanism
-var loggers = {
+let loggers = {
   local : {
     verbose : function(msg){
       console.log('[V]:' + msg );
@@ -27,7 +27,7 @@ var loggers = {
 //Create graylogger if graylog is enabled
 if (config.logging.loggers.graylog )
 {
-  var graylogger = new graylog2.graylog({
+  let graylogger = new graylog2.graylog({
     servers: [
       { 'host': config.logging.loggers.graylog.host, port: config.logging.loggers.graylog.port }
     ],
@@ -60,8 +60,8 @@ if (config.logging.loggers.graylog )
   }
 }
 
-var doLog = function(type, scriptName,message){
-  var msg = scriptName;
+let doLog = function(type, scriptName,message){
+  let msg = scriptName;
   if (message != undefined )
     msg = msg + ' : ' + message;
   _.forEach(config.logging.loggers, function(logger) {
@@ -69,19 +69,19 @@ var doLog = function(type, scriptName,message){
   });
 };
 
-var isVerbose = function(){
+let isVerbose = function(){
   return config.logging.level == 'verbose'
 };
-var isDebug = function(){
+let isDebug = function(){
   return isVerbose() || config.logging.level == 'debug';
 };
-var isInfo = function(){
+let isInfo = function(){
   return isDebug() || config.logging.level == 'info';
 };
-var isWarn = function(){
+let isWarn = function(){
   return isInfo() || config.logging.level == 'warn';
 };
-var isError = function(){
+let isError = function(){
   return isWarn() || config.logging.level == 'error';
 };
 

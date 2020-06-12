@@ -1,9 +1,9 @@
-var config = require('./config');
-var user = require('./models/user.model');
-var LocalStrategy = require('passport-local').Strategy;
-var helperServices = require('./services/helper.service')
-var Passport = require('passport');
-var request = require('request');
+let config = require('./config');
+let user = require('./models/user.model');
+let LocalStrategy = require('passport-local').Strategy;
+let helperServices = require('./services/helper.service')
+let Passport = require('passport');
+let request = require('request');
 
 //Serialization
 Passport.serializeUser(function(user, done) {
@@ -22,7 +22,7 @@ Passport.deserializeUser(function(userId, done) {
 Passport.use(new LocalStrategy({usernameField:'username'},function(username, password, done) {
  
    new user({username: username }).fetch().then(function(data) {
-      var authInfo = data;
+      let authInfo = data;
       if(authInfo === null) {
         return done(null, false, {error : true, statusCode : 201});
       } else {

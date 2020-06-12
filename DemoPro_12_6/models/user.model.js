@@ -1,8 +1,8 @@
-var orm = require('../orm');
+let orm = require('../orm');
 
 // Related Models
 
-var user = orm.bookshelf.Model.extend({
+let user = orm.bookshelf.Model.extend({
 	  tableName: 'user',
 	  idAttribute: 'id'
 });

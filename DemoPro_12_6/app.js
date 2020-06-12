@@ -1,4 +1,4 @@
-var express        = require('express'),
+let express        = require('express'),
 	expressHbs     = require('express-handlebars'),
 	config         = require('./config'),
 	app 		   = express(),
@@ -12,12 +12,8 @@ var express        = require('express'),
   routes         = require('./routes'),
   path 		   = require('path'),
   server = require('http').createServer(app);
-var moment = require('moment');
-var moment= require('moment-timezone');
-
-var multer  = require('multer');
-var gcm = require('node-gcm');
-var cron = require('node-cron');
+let gcm = require('node-gcm');
+let cron = require('node-cron');
 
 //app.use(multer({dest:'./uploads/'}))
 
@@ -47,20 +43,20 @@ app.use(function(req, res, next) { //allow cross origin requests
     //app.use(express.static('../client'));
     app.use(bodyParser.json());  
 
-    /*var storage = multer.diskStorage({ //multers disk storage settings
+    /*let storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             cb(null, './uploads/');
         },
         filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
+            let datetimestamp = Date.now();
             cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
 
             //console.log("--------------------------------------------------------");
-            var image_name = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+            let image_name = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
         }
     });
 
-    var upload = multer({ //multer settings
+    let upload = multer({ //multer settings
                     storage: storage
                 }).single('file');
 
@@ -109,7 +105,7 @@ app.use(require('less-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
     res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -120,7 +116,7 @@ app.use(function(req, res, next) {
 
 // error handlers
 app.use(function (err, req, res, next) {
-    var code = err.status || 500;
+    let code = err.status || 500;
     return res.status(code).json({
         error: true,
         code: code,
@@ -128,7 +124,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-var servicesPromises = [];
+let servicesPromises = [];
 
 Promise.all(servicesPromises).then(function() {
   multiLogger.info('app.js','All services initialized');

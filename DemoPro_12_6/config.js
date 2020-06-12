@@ -1,4 +1,4 @@
-var config = {
+let config = {
     server: {
       id: "environment",
       name: "demo",

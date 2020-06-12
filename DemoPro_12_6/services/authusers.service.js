@@ -1,19 +1,18 @@
-var Contact = require('../models/user.model'),
+let Contact = require('../models/user.model'),
     moment = require('moment'),
     promise = require('bluebird'),
     helperServices = require('../services/helper.service'),
     errorTypes = require('../errortypes');
-//var crypto = require("crypto");
+//let crypto = require("crypto");
 
 
-exports.addReg2 = function(params) {
+exports.addReg = function(params) {
     console.log("addReg");
-    
-    var username = (params.username) ? params.username : false;
-    var password  = (params.password ) ? params.password  : false;
-    var user_type  = (params.user_type ) ? params.user_type  : false;
-    var status  = (params.status ) ? params.status  : false;
-    var Contactdata = new Contact({
+    let username = (params.username) ? params.username : false;
+    let password  = (params.password ) ? params.password  : false;
+    let user_type  = (params.user_type ) ? params.user_type  : false;
+    let status  = (params.status ) ? params.status  : false;
+    let Contactdata = new Contact({
         "username": username,
         "password":  password ,
         "user_type":  user_type ,
@@ -31,41 +30,24 @@ exports.addReg2 = function(params) {
 
 }
 
-exports.add = function(image_name) {
-    console.log("addReg");
-    var Contactdata = new Contact({
-        "image": image_name,
-    });
-
-    return Contactdata.save(null).tap(function(model) {
-        Contactdata = model;
-        return Contactdata;
-    }).then(function(Contactdata) {
-        return Contactdata;
-    }).catch(function(err) {
-        return err;
-    });
-
-}
-
-exports.editReg2 = function(params) {
-    var username = (params.username) ? params.username : false;
-    var password  = (params.password ) ? params.password  : false;
-    var id = (params.id) ? params.id : false;
+exports.editReg = function(params) {
+    let username = (params.username) ? params.username : false;
+    let password  = (params.password ) ? params.password  : false;
+    let id = (params.id) ? params.id : false;
     params = {
         "username": username,
         "password": password,
     }
-    var updateParams = {
+    let updateParams = {
         patch: true
     }
-    var data = params;
-        return Contact.forge().query(function(qb) {
-            qb.where('id', id);
-        }).fetchAll().then(function(products) {
-            products.forEach(function(products) {
-            return products.save(data, updateParams);
-        });
+    let data = params;
+    return Contact.forge().query(function(qb) {
+        qb.where('id', id);
+    }).fetch().then(function(products) {
+        //products.forEach(function(products) {
+        return products.save(data, updateParams);
+        //});
     }).catch(function(err) {
         console.log(err);
         return err;
