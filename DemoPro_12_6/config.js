@@ -22,8 +22,7 @@ let config = {
         port:'3306',
         user: 'root',
         password: '',
-        //database: 'SmartParking',
-        database: 'test',
+        database: 'cns',
         charset: 'utf8'
       }
     },

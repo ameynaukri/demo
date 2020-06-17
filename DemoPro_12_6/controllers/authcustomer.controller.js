@@ -1,19 +1,19 @@
 /**
- * authentication controller, for authentication user
+ * authentication controller, for authentication Customer
  */
 var config = require('../config'),
-    user = require('../models/user.model'),
-    //authService = require('../services/authusers.service'),
+    Customer = require('../models/Customer.model'),
+    //authService = require('../services/authCustomers.service'),
     Passport = require('passport');
 
-//Authorise User
-exports.authorizseUser = function(req, res, next) {
+//Authorise Customer
+exports.authorizseCustomer = function(req, res, next) {
     if (!req.isAuthenticated()) {
         return res.status(401).send({
             "error": true,
             "status": "error",
-            "message": "User is not authorized",
-            "result": "User is not authorized"
+            "message": "Customer is not authorized",
+            "result": "Customer is not authorized"
         });
     }
 
@@ -25,8 +25,7 @@ exports.login = function(req, res, next) {
 
     password = (req.body.Password) ? req.body.Password : false;
     username = (req.body.username) ? req.body.username : false;
-    usertype = (req.body.usertype) ? req.body.usertype : false;
-    // id = (req.body.id)?req.body.id:false;
+    id = (req.body.id) ? req.body.id : false;
 
     if (password)
         req.body.password = password;
@@ -38,16 +37,16 @@ exports.login = function(req, res, next) {
         });
     } else {
         return Passport.authenticate('local',
-            function(err, user, info) {
+            function(err, Customer, info) {
                 if (err) {
                     return errors.returnError(err, res);
                 }
-                if (!user) {
+                if (!Customer) {
                     if (info.error == true && info.statusCode == 201) {
                         return res.json({
                             "StatusCode": 404,
                             "result": null,
-                            "ResponseMessage": "User doesn't exist."
+                            "ResponseMessage": "Customer doesn't exist."
                         });
                     } else if (info.error == true && info.statusCode == 202) {
                         return res.json({
@@ -58,12 +57,12 @@ exports.login = function(req, res, next) {
 
                     }
                 } else {
-                    return req.logIn(user, function(err) {
+                    return req.logIn(Customer, function(err) {
                         console.log("login");
                         res.setHeader('auth-key', 'Ak12mr27Xwg@d89ul');
                         return res.json({
                             "StatusCode": 200,
-                            "result": user,
+                            "result": Customer,
                             "ResponseMessage": "Success"
                         });
                     });
@@ -75,12 +74,12 @@ exports.login = function(req, res, next) {
 
 exports.logout = function(req, res) {
     var registrationId = (req.body.RegistrationId) ? req.body.RegistrationId : false;
-    authService.logout(req.body.UserID, registrationId).then(function(model) {
+    authService.logout(req.body.CustomerID, registrationId).then(function(model) {
         res.json({
             "error": false,
             "status": "success",
-            "message": "User logout successfully.",
-            "result": "User logout successfully."
+            "message": "Customer logout successfully.",
+            "result": "Customer logout successfully."
         });
     });
 };
